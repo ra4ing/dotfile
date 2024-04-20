@@ -13,6 +13,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="/home/ra4ing/tools/llvm-project/build/bin:$PATH"
 export PATH="$HOME/.spicetify:$PATH"
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.scripts:$PATH"
@@ -23,11 +24,33 @@ export PATH="/usr/lib/ruby/gems/3.0.0:$PATH"
 export PATH="$HOME/tools/firtool-1.57.1/bin:$PATH"
 export PATH="$HOME/tools/oss-cad-suite/bin:$PATH"
 export PATH="$HOME/tools/firrtl/utils/bin:$PATH"
-export RISCV="$HOME/tools/riscv-tool"
+export PATH="$HOME/.npm-global/bin:$PATH"
+export RISCV="$HOME/tools/riscv"
 # export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export GPG_TTY="${TTY:-$(tty)}"
 
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+# if ! shopt -oq posix; then
+#   if [ -f /usr/share/bash-completion/bash_completion ]; then
+#     . /usr/share/bash-completion/bash_completion
+#   elif [ -f /etc/bash_completion ]; then
+#     . /etc/bash_completion
+#   fi
+# fi
+# . "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# fnm
+export PATH="/home/ra4ing/.local/share/fnm:$PATH"
+eval "`fnm env`"
 
 export SUDO_PROMPT="passwd: "
 export TERMINAL="wezterm"
