@@ -1,0 +1,17 @@
+[font.normal]
+family = "MesloLGS NF"
+
+[scrolling]
+history= 10000
+multiplier = 3
+
+[window]
+dimensions = { columns = 100, lines = 30 }
+opacity = 0.95
+blur = true
+decorations = "Transparent"
+startup_mode = "Windowed"
+dynamic_title = true
+
+[colors]
+transparent_background_colors = true 
