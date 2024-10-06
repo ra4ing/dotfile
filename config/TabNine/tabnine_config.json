@@ -4,7 +4,7 @@
   "beta_enabled": "No",
   "ignore_all_lsp": false,
   "creation_time": "2024-09-28T13:50:25.174924649Z",
-  "guuid": null,
+  "guuid": "532c42131c2263e9ff37c378125f162caa80f073e41fdaecb17a86c0b7167192",
   "semantic_status": {},
   "enable_telemetry": true,
   "user_understands_that_enabling_tabnine_cloud_sends_code_to_tabnine_servers": true,
@@ -37,7 +37,9 @@
   "override_context_length": null,
   "onboarding": null,
   "has_git_repos": null,
-  "gusr": null,
+  "gusr": {
+    "dgc": "532c42131c2263e9ff37c378125f162caa80f073e41fdaecb17a86c0b7167192"
+  },
   "exclude_file_masks": null,
   "inline_suggestions_mode": null,
   "use_specialized_model_if_available": null,
