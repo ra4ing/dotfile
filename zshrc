@@ -14,3 +14,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# fnm
+FNM_PATH="/home/ra4ing/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/ra4ing/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
