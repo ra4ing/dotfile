@@ -543,4 +543,40 @@ function git-svn(){
   fi  
 }
 
+# proxy setting
+function proxy () {
+	export windows_host=$(ip route | grep default | awk '{print $3}')
+	export windows_host=172.24.208.1
+	export socks_hostport=10808
+	export http_hostport=10809
+
+    	export https_proxy=http://${windows_host}:${http_hostport}
+    	export HTTPS_PROXY=http://${windows_host}:${http_hostport}
+    	export http_proxy=http://${windows_host}:${http_hostport}
+    	export HTTP_PROXY=http://${windows_host}:${http_hostport}
+    	export ALL_PROXY=socks5://${windows_host}:${socks_hostport}
+    	export all_proxy=socks5://${windows_host}:${socks_hostport}
+        git config --global http.proxy socks5://${windows_host}:${socks_hostport}
+        git config --global https.proxy socks5://${windows_host}:${socks_hostport}
+  	echo "Proxy on"
+}
+
+function noproxy () {
+  	unset HTTPS_PROXY;
+  	unset HTTP_PROXY;
+  	unset ALL_PROXY;
+    	unset https_proxy
+    	unset http_proxy
+    	unset all_proxy
+  	git config --global --unset  http.proxy;
+  	git config --global --unset  https.proxy;
+  	echo "Proxy off"
+}
+
+function echoproxy() {
+    	echo $all_proxy
+    	echo $https_proxy
+    	echo $http_proxy
+}	
+
 # vim:ft=sh
