@@ -1,0 +1,6 @@
+[submodule "gdb_config/Pwngdb"]
+	path = gdb_config/Pwngdb
+	url = https://github.com/scwuaptx/Pwngdb.git
+[submodule "gdb_config/pwndbg"]
+	path = gdb_config/pwndbg
+	url = https://github.com/pwndbg/pwndbg.git

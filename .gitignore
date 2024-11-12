@@ -1,1 +1,3 @@
-config/TabNine/
+**/.zcompdump*
+**/.venv
+**/.gdb_history

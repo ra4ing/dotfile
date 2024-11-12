@@ -2,6 +2,39 @@
 ## Utility Functions
 ##
 
+# pwn
+pwndocker() {
+    echo "Fetching available tags for roderickchan/debug_pwn_env..."
+    local tags=$(curl -s https://registry.hub.docker.com/v1/repositories/roderickchan/debug_pwn_env/tags | jq -r '.[].name')
+
+    if [ -z "$tags" ]; then
+        echo "Failed to fetch tags or no tags available."
+        return 1
+    fi
+
+    echo "Available tags:"
+    local count=1
+    local tag_array=()
+    for tag in $tags; do
+        echo "$count) $tag"
+        tag_array+=($tag)
+        ((count++))
+    done
+
+    echo -n "Please choose a tag (enter the number): "
+    read tag_choice
+
+    local selected_tag=${tag_array[$tag_choice-1]}
+    if [ -z "$selected_tag" ]; then
+        echo "Invalid choice"
+        return 1
+    fi
+
+    docker run -it --rm -v $PWD:/home/ctf/hacker --privileged roderickchan/debug_pwn_env:$selected_tag "/bin/zsh"
+}
+
+
+
 edit ()
 {
 	if [ "$(type -t jpico)" = "file" ]; then
@@ -579,4 +612,4 @@ function echoproxy() {
     	echo $http_proxy
 }	
 
-# vim:ft=sh
+# vim:ft=zsh

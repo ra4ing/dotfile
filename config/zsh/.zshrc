@@ -12,6 +12,7 @@ fi
 ## rxyhn's Z-Shell configuration
 ## https://github.com/rxyhn
 
+ZDOTDIR="$HOME/.config/zsh"
 while read file
 do 
   source "$ZDOTDIR/$file.zsh"
@@ -22,8 +23,9 @@ aliases
 utility
 options
 plugins
-keybinds
 prompt
+keybinds
+pwn
 wifi_proxy
 EOF
 

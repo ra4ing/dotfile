@@ -28,7 +28,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # History
-HISTFILE="$XDG_CACHE_HOME/zsh/.zhistory"
+HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 
