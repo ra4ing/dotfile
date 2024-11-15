@@ -37,17 +37,6 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-# if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
-
 . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.config/nvm"
@@ -56,19 +45,19 @@ export NVM_DIR="$HOME/.config/nvm"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.anaconda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.anaconda/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/anaconda3/bin:$PATH"
+        export PATH="$HOME/.anaconda/bin:$PATH"
     fi
 fi
 unset __conda_setup
+conda activate py310
 # <<< conda initialize <<<
-
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
