@@ -38,6 +38,24 @@ pip install --upgrade pip
 
 echo "======================="
 echo "Setting zsh"
+sudo apt-get install -y \
+    build-essential \
+    libncursesw5-dev \
+    libssl-dev \
+    libpcre3-dev \
+    libdb-dev \
+    zlib1g-dev \
+    libgdbm-dev \
+    liblzma-dev \
+    uuid-dev \
+    libicu-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libreadline-dev \
+    libevent-dev \
+    autoconf \
+    yodl \
+    gettext
 
 # cargo
 curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -54,7 +72,14 @@ pip install https://github.com/nvbn/thefuck/archive/master.zip
 #starship
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 
-sudo apt-get -y install zsh
+wget https://sourceforge.net/projects/zsh/files/latest/download -O zsh-latest.tar.xz
+tar xf zsh-latest.tar.xz
+cd zsh-*
+./Util/preconfig
+./configure --prefix=/usr/local
+make -j$(nproc)
+sudo make install
+sudo chsh -s /usr/local/bin/zsh
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended

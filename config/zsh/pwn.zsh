@@ -1,4 +1,4 @@
-run_docker_env() {
+run-docker-env() {
   if ! command -v docker &> /dev/null; then
     echo "Docker is not installed. Please install Docker and ensure the service is running."
     return 1
