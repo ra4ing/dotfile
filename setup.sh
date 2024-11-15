@@ -31,8 +31,8 @@ echo "Installing Anaconda for Python Management..."
 wget https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh -O "$HOME/anaconda.sh"
 bash "$HOME/anaconda.sh" -b -p "$HOME/.anaconda"
 rm "$HOME/anaconda.sh"
-$HOME/.anaconda/bin/conda conda create -n py310 python=3.10 -y
-$HOME/.anaconda/bin/conda activate py310
+$HOME/.anaconda/bin/conda create -n py310 python=3.10 -y
+source $HOME/.anaconda/bin/activate py310
 pip install --upgrade pip
 
 
@@ -44,10 +44,11 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # fnm
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
-mkdir /run/user/1001/fnm_multishells -p && chmod a+w /run/user/1001/fnm_multishells
-mkdir /run/user/1000/fnm_multishells -p && chmod a+w /run/user/1000/fnm_multishells
+sudo mkdir /run/user/1001/fnm_multishells -p && sudo chmod a+w /run/user/1001/fnm_multishells
+sudo mkdir /run/user/1000/fnm_multishells -p && sudo chmod a+w /run/user/1000/fnm_multishells
 
 # thefuck
+pip uninstall thefuck
 pip install https://github.com/nvbn/thefuck/archive/master.zip
 
 #starship
