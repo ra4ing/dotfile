@@ -56,7 +56,7 @@ else
     fi
 fi
 unset __conda_setup
-conda activate py310
+source  $HOME/.anaconda/bin/activate py310
 # <<< conda initialize <<<
 
 # fnm

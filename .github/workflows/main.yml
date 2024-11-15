@@ -1,0 +1,18 @@
+name: Dispatch Event to Main Repository
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.NOTIFY_DOCKER }}
+        repository: ra4ing/docker-env
+        event-type: dotfile-updated
