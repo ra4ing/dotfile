@@ -1,7 +1,4 @@
 #!/bin/bash
-ubuntu_version=$(lsb_release -sr)
-echo "Ubuntu version: $ubuntu_version"
-
 echo "======================="
 echo "flag example..."
 sudo sh -c 'echo "flag{this_is_a_flag}" > /flag' && \
@@ -22,7 +19,8 @@ sudo apt-get install -y texinfo libncurses5-dev libexpat1-dev libssl-dev libdw-d
 sudo apt-get install -y libncursesw5-dev libpython3-dev liblzma-dev libbabeltrace-ctf-dev
 sudo apt-get install -y bc lsb-release jq
 
-
+ubuntu_version=$(lsb_release -sr)
+echo "Ubuntu version: $ubuntu_version"
 if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
     sudo apt-get install -y libgcc-s1:i386
 else
@@ -57,40 +55,43 @@ pipx
 
 echo "======================="
 echo "Installing gdb..."
+conda install -c conda-forge gdb --yes
 
-if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
-    gdb_version="gdb-15.2"
-elif dpkg --compare-versions "$ubuntu_version" "ge" "18.04"; then
-    gdb_version="gdb-10.2"
-else
-    gdb_version="gdb-8.3"
-fi
-CONDA_PREFIX=$(conda info --base)/envs/py310
-wget https://ftp.gnu.org/gnu/gdb/$gdb_version.tar.gz
-tar -xzf $gdb_version.tar.gz
-cd $gdb_version
-./configure \
-    --prefix=/usr/local \
-    --with-python=$CONDA_PREFIX/bin/python3.10 \
-    LDFLAGS="-L$CONDA_PREFIX/lib -L$CONDA_PREFIX/lib64" \
-    CPPFLAGS="-I$CONDA_PREFIX/include/python3.10 -I$CONDA_PREFIX/include"
-make -j$(nproc)
-sudo make install
-cd ..
-rm -rf $gdb_version $gdb_version.tar.gz
+# if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
+#     gdb_version="gdb-15.2"
+# elif dpkg --compare-versions "$ubuntu_version" "ge" "18.04"; then
+#     gdb_version="gdb-10.2"
+# else
+#     gdb_version="gdb-8.3"
+# fi
+# CONDA_PREFIX=$(conda info --base)/envs/py310
+# wget https://ftp.gnu.org/gnu/gdb/$gdb_version.tar.gz
+# tar -xzf $gdb_version.tar.gz
+# cd $gdb_version
+# ./configure \
+#     --prefix=/usr/local \
+#     --with-python=$CONDA_PREFIX/bin/python3.10 \
+#     LDFLAGS="-L$CONDA_PREFIX/lib -L$CONDA_PREFIX/lib64" \
+#     CPPFLAGS="-I$CONDA_PREFIX/include/python3.10 -I$CONDA_PREFIX/include"
+# make -j$(nproc)
+# sudo make install
+# cd ..
+# rm -rf $gdb_version $gdb_version.tar.gz
 
 echo "======================="
 echo "installing pwndbg"
-if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
-    pwndbg_version="master"
-else
-    pwndbg_version="2023.07.17"
-fi
+# if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
+#     pwndbg_version="master"
+# else
+#     pwndbg_version="2024.08.29"
+# fi
+pwndbg_version="2024.08.29"
 git submodule init && git submodule update
 cd "$HOME/.dotfile/gdb_config/pwndbg"
 git checkout $pwndbg_version
-export PYTHONPATH=$CONDA_PREFIX/lib/python3.10/site-packages
-export PATH=$CONDA_PREFIX/bin:$PATH
-./setup.sh
+poetry install
+# export PYTHONPATH=$CONDA_PREFIX/lib/python3.10/site-packages
+# export PATH=$CONDA_PREFIX/bin:$PATH
+# ./setup.sh
 ln -sf "$HOME/.dotfile/gdb_config/gdbinit" "$HOME/.gdbinit"
 echo "PWN configuration setup completed successfully!"

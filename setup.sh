@@ -27,15 +27,13 @@ echo "======================="
 echo "Installing Anaconda..."
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get -y install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
-ANACONDA_VERSION=$(curl -s https://repo.anaconda.com/archive/ | grep -oP 'Anaconda3-[0-9]+\.[0-9]+-[0-9]+-Linux-x86_64\.sh' | sort -V | tail -n1)
-wget "https://repo.anaconda.com/archive/$ANACONDA_VERSION" -O "$HOME/anaconda.sh"
-bash "$HOME/anaconda.sh" -b -p "$HOME/.anaconda"
-rm "$HOME/anaconda.sh"
+wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O "$HOME/miniconda.sh"
+bash "$HOME/miniconda.sh" -b -p "$HOME/.anaconda"
+rm "$HOME/miniconda.sh"
 source $HOME/.anaconda/etc/profile.d/conda.sh && \
 $HOME/.anaconda/bin/conda create -n py310 python=3.10 -y && \
 conda activate py310 && \
 pip install --upgrade pip
-
 
 echo "======================="
 echo "Setting zsh"
@@ -65,14 +63,14 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 USER_ID=$(id -u)
 sudo mkdir -p /run/user/$USER_ID/fnm_multishells
-sudo chown $USER:$USER /run/user/$USER_ID/fnm_multishells
+sudo chmod a+w /run/user/$USER_ID/fnm_multishells
 
 # thefuck
-pip uninstall thefuck
 pip install https://github.com/nvbn/thefuck/archive/master.zip
 
 #starship
-curl -sS https://starship.rs/install.sh | sh -s -- -y
+# curl -sS https://starship.rs/install.sh | sh -s -- -y
+conda install -c conda-forge starship --yes
 
 wget https://www.zsh.org/pub/zsh-5.9.tar.xz -O zsh.tar.xz
 tar xf zsh.tar.xz
@@ -86,7 +84,7 @@ if ! grep -Fxq "/usr/local/bin/zsh" /etc/shells
 then
     echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 fi
-chsh -s /usr/local/bin/zsh
+# chsh -s /usr/local/bin/zsh
 
 # oh-my-zsh
 export RUNZSH=no
@@ -101,7 +99,7 @@ GITSTATUSD_DIR="$HOME/.cache/gitstatus"
 mkdir -p "$GITSTATUSD_DIR"
 wget -O "$GITSTATUSD_DIR/gitstatusd-linux-x86_64.tar.gz" "https://github.com/romkatv/gitstatus/releases/download/v1.5.4/gitstatusd-linux-x86_64.tar.gz"
 tar -xzf "$GITSTATUSD_DIR/gitstatusd-linux-x86_64.tar.gz" -C "$GITSTATUSD_DIR"
-typeset -g POWERLEVEL9K_GITSTATUS_DIR="$HOME/.cache/gitstatusd"
+typeset -g POWERLEVEL9K_GITSTATUS_DIR="$GITSTATUSD_DIR"
 
 zsh "$HOME/.dotfile/config/zsh/.zshrc"
 

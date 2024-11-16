@@ -1,16 +1,12 @@
 ##
 ## PATH & ENV Var
 ##
+export PWNDBG_VENV_PATH="PWNDBG_PLEASE_SKIP_VENV"
 
-if [ -d "$HOME/.pip_venv" ]; then
-  source $HOME/.pip_venv/bin/activate
-fi
-
-export PATH="$HOME/perl5/bin${PATH:+:${PATH}}";
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
+export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
+export PERL_MB_OPT="--install_base \"$HOME/perl5\"";
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5";
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -18,6 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 export TERM="xterm-256color"
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$HOME/perl5/bin${PATH:+:${PATH}}";
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.spicetify:$PATH"
 export PATH="$HOME/.scripts:$PATH"
@@ -26,16 +23,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/perl5/bin:$PATH"
 export PATH="/usr/lib/ruby/gems/3.0.0:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+export GPG_TTY="${TTY:-$(tty)}"
 # export PATH="$HOME/tools/firtool-1.57.1/bin:$PATH"
 # export PATH="$HOME/tools/oss-cad-suite/bin:$PATH"
 # export PATH="$HOME/tools/firrtl/utils/bin:$PATH"
 # export PATH="$HOME/tools/llvm-project/build/bin:$PATH"
 # export RISCV="$HOME/tools/riscv"
-export GPG_TTY="${TTY:-$(tty)}"
-
-export GOPATH="$HOME/go"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$GOPATH/bin"
 
 . "$HOME/.cargo/env"
 
@@ -56,7 +52,8 @@ else
     fi
 fi
 unset __conda_setup
-source  $HOME/.anaconda/bin/activate py310
+source $HOME/.anaconda/etc/profile.d/conda.sh && \
+conda activate py310
 # <<< conda initialize <<<
 
 # fnm

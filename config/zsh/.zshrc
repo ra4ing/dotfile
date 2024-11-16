@@ -29,8 +29,10 @@ pwn
 wifi_proxy
 EOF
 
-# vim:ft=zsh:nowrap
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# vim:ft=zsh:nowrap
+
