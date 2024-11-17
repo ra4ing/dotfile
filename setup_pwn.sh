@@ -13,10 +13,10 @@ sudo apt-get install -y libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev
 sudo apt-get install -y libc6-dbg libc6-dbg:i386
 sudo apt-get install -y bison flex build-essential gcc-multilib
 sudo apt-get install -y qemu-system-x86 qemu-user qemu-user-binfmt
-sudo apt-get install -y libgmp-dev libmpfr-dev libmpc-dev libreadline-dev libtool 
+# sudo apt-get install -y libgmp-dev libmpfr-dev libmpc-dev libreadline-dev libtool 
 sudo apt-get install -y gcc gdb gdbserver gdb-multiarch clang lldb make cmake
-sudo apt-get install -y texinfo libncurses5-dev libexpat1-dev libssl-dev libdw-dev libelf-dev
-sudo apt-get install -y libncursesw5-dev libpython3-dev liblzma-dev libbabeltrace-ctf-dev
+# sudo apt-get install -y texinfo libncurses5-dev libexpat1-dev libssl-dev libdw-dev libelf-dev
+# sudo apt-get install -y libncursesw5-dev libpython3-dev liblzma-dev libbabeltrace-ctf-dev
 sudo apt-get install -y bc lsb-release jq
 
 ubuntu_version=$(lsb_release -sr)
@@ -29,7 +29,7 @@ fi
 
 echo "======================="
 echo "Python packages for pwn..."
-source $HOME/.anaconda/etc/profile.d/conda.sh && \
+source $HOME/.anaconda/bin/activate && \
 conda activate py310 && \
 pip install --upgrade pip && \
 pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/simple && \
@@ -90,8 +90,5 @@ git submodule init && git submodule update
 cd "$HOME/.dotfile/gdb_config/pwndbg"
 git checkout $pwndbg_version
 poetry install
-# export PYTHONPATH=$CONDA_PREFIX/lib/python3.10/site-packages
-# export PATH=$CONDA_PREFIX/bin:$PATH
-# ./setup.sh
 ln -sf "$HOME/.dotfile/gdb_config/gdbinit" "$HOME/.gdbinit"
 echo "PWN configuration setup completed successfully!"

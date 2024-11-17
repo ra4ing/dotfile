@@ -4,23 +4,14 @@
 export ZSH="$HOME/.oh-my-zsh/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
+if [[ -f "/.dockerenv" ]]; then
+    ZSH_THEME="robbyrussell"
+fi
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
-
-source $ZSH/oh-my-zsh.sh
-
-
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8"
-
-MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker-*:*' option-stacking yes
-
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-z cp history extract autojump tmux vi-mode docker golang)
 
 # Configure and load plugins using Zinit's
 ZINIT_HOME="${ZINIT_HOME:-${XDG_DATA_HOME:-${HOME}/.local/share}/zinit}"
@@ -71,6 +62,17 @@ if [[ $- != *i* ]]; then
     compinit
     return
 fi
+
+source $ZSH/oh-my-zsh.sh
+
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8"
+
+MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-z cp history extract autojump tmux vi-mode docker golang)
 
 install_zinit
 source "${ZINIT_HOME}/zinit.git/zinit.zsh"

@@ -52,7 +52,7 @@ else
     fi
 fi
 unset __conda_setup
-source $HOME/.anaconda/etc/profile.d/conda.sh && \
+source $HOME/.anaconda/bin/activate && \
 conda activate py310
 # <<< conda initialize <<<
 
