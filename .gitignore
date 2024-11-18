@@ -2,3 +2,5 @@
 **/.venv
 **/.gdb_history
 **/*.pyc
+config/nvm
+config/pip

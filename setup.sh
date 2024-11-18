@@ -83,6 +83,7 @@ if ! grep -Fxq "/usr/local/bin/zsh" /etc/shells
 then
     echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 fi
+# sudo apt-get install zsh
 
 # oh-my-zsh
 export RUNZSH=no
