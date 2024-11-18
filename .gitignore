@@ -1,3 +1,4 @@
 **/.zcompdump*
 **/.venv
 **/.gdb_history
+**/*.pyc
