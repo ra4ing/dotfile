@@ -121,17 +121,7 @@ run-docker-env() {
     echo "  - 以特权模式运行 (--privileged)"
     echo "  - 镜像: $image"
 
-    echo -n "是否继续启动容器？ (y/n): "
-    read -r confirm
-    case "$confirm" in
-        [Yy]* )
-            echo "正在启动容器..."
-            docker run -it --rm -v "$current_dir:/home/ra4ing/hacker" --privileged "$image"
-            ;;
-        * )
-            echo "已取消操作。"
-            return 0
-            ;;
-    esac
+    echo "正在启动容器..."
+    docker run -it --rm -v "$current_dir:/home/ra4ing/hacker" --privileged "$image"
 }
 

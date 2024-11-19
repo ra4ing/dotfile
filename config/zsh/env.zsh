@@ -1,6 +1,11 @@
 ##
 ## PATH & ENV Var
 ##
+
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 export PWNDBG_VENV_PATH="PWNDBG_PLEASE_SKIP_VENV"
 
 export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}";

@@ -104,4 +104,7 @@ typeset -g POWERLEVEL9K_GITSTATUS_DIR="$GITSTATUSD_DIR"
 
 zsh "$HOME/.dotfile/config/zsh/.zshrc"
 
+sudo apt-get -y install -y locales
+locale-gen en_US.UTF-8
+
 echo "Base configuration setup completed successfully!"
