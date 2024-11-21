@@ -66,7 +66,7 @@ sudo mkdir -p /run/user/$USER_ID/fnm_multishells
 sudo chmod a+w /run/user/$USER_ID/fnm_multishells
 
 # thefuck
-pip install https://github.com/nvbn/thefuck/archive/master.zip
+# pip install https://github.com/nvbn/thefuck/archive/master.zip
 
 #starship
 conda install -c conda-forge starship --yes

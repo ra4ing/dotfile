@@ -384,7 +384,7 @@ lazyg() {
     git push
 }
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 function f() {
     if [[ -n "$1" ]] ;then
