@@ -91,4 +91,6 @@ cd "$HOME/.dotfile/gdb_config/pwndbg"
 git checkout $pwndbg_version
 poetry install
 ln -sf "$HOME/.dotfile/gdb_config/gdbinit" "$HOME/.gdbinit"
+
+sudo bash -c "echo core > /proc/sys/kernel/core_pattern"
 echo "PWN configuration setup completed successfully!"
