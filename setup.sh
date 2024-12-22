@@ -77,7 +77,8 @@ cd zsh-5.9
             --sysconfdir=/etc/zsh    \
             --enable-etcdir=/etc/zsh \
             --enable-cap             \
-            --enable-gdbm            &&
+            --enable-gdbm            \
+            --with-tcsetpgrp         &&
 make -j$(nproc)
 sudo make install
 cd ..
