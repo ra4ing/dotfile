@@ -49,8 +49,7 @@ bash ~/.anaconda/miniconda.sh -b -u -p ~/.anaconda
 rm ~/.anaconda/miniconda.sh
 
 source $HOME/.anaconda/bin/activate && \
-$HOME/.anaconda/bin/conda create -n py310 python=3.10 -y && \
-conda activate py310 && \
+conda activate && \
 pip install --upgrade pip
 
 echo "======================="
@@ -74,16 +73,20 @@ conda install -c conda-forge starship --yes
 wget https://www.zsh.org/pub/zsh-5.9.tar.xz -O zsh.tar.xz
 tar xf zsh.tar.xz
 cd zsh-5.9
-./configure --prefix=/usr/local --without-tcsetpgrp
+./configure --prefix=/usr            \
+            --sysconfdir=/etc/zsh    \
+            --enable-etcdir=/etc/zsh \
+            --enable-cap             \
+            --enable-gdbm            &&
 make -j$(nproc)
 sudo make install
 cd ..
 rm -rf zsh-5.9 zsh.tar.xz
-if ! grep -Fxq "/usr/local/bin/zsh" /etc/shells
+if ! grep -Fxq "/usr/bin/zsh" /etc/shells
 then
-    echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+    echo "/usr/bin/zsh" | sudo tee -a /etc/shells
 fi
-sudo ln -s /usr/local/bin/zsh /bin/zsh
+sudo ln -s /usr/bin/zsh /bin/zsh
 # sudo apt-get install zsh
 
 # oh-my-zsh

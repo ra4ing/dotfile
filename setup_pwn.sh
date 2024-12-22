@@ -30,7 +30,7 @@ fi
 echo "======================="
 echo "Python packages for pwn..."
 source $HOME/.anaconda/bin/activate && \
-conda activate py310 && \
+conda activate&& \
 pip install --upgrade pip && \
 pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/simple && \
 pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn && \
