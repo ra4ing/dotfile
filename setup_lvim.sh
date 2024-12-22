@@ -38,6 +38,5 @@ rm -rf ./lazygit lazygit.tar.gz
 
 #lvim
 LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) -y
-source 
 nvm use  --delete-prefix v16.13.2 --silent
 
