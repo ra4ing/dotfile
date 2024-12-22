@@ -4,9 +4,9 @@
 export ZSH="$HOME/.oh-my-zsh/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
-if [[ -f "/.dockerenv" ]]; then
-    ZSH_THEME="robbyrussell"
-fi
+# if [[ -f "/.dockerenv" ]]; then
+#     ZSH_THEME="robbyrussell"
+# fi
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
