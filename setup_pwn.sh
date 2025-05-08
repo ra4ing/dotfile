@@ -6,91 +6,55 @@ sudo sh -c 'echo "flag{this_is_a_flag}" > /flag.txt' && \
 sudo chmod 400 /flag /flag.txt
 
 echo "======================="
-echo "packages for pwn..."
-sudo dpkg --add-architecture i386
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev
-sudo apt-get install -y libc6-dbg libc6-dbg:i386
-sudo apt-get install -y bison flex build-essential gcc-multilib
-sudo apt-get install -y qemu-system-x86 qemu-user qemu-user-binfmt
-# sudo apt-get install -y libgmp-dev libmpfr-dev libmpc-dev libreadline-dev libtool 
-sudo apt-get install -y gcc gdb gdbserver gdb-multiarch clang lldb make cmake
-# sudo apt-get install -y texinfo libncurses5-dev libexpat1-dev libssl-dev libdw-dev libelf-dev
-# sudo apt-get install -y libncursesw5-dev libpython3-dev liblzma-dev libbabeltrace-ctf-dev
-sudo apt-get install -y bc lsb-release jq
+echo "PWN shell/configuration setup..."
 
-ubuntu_version=$(lsb_release -sr)
-echo "Ubuntu version: $ubuntu_version"
-if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
-    sudo apt-get install -y libgcc-s1:i386
+# 检查 Python 版本
+PYVER=$(python3 -c 'import sys; print("{}.{}".format(sys.version_info.major, sys.version_info.minor))')
+echo "Detected Python version: $PYVER"
+
+git submodule init && git submodule update
+
+# 自动安装 pwndbg
+cd "$HOME/.dotfile/gdb_config/pwndbg"
+if [[ "$PYVER" == "3.8" || "$PYVER" == "3.9" ]]; then
+    echo "Using pwndbg branch: 2024.08.29 (for Python 3.8/3.9)"
+    git fetch --all
+    git checkout 2024.08.29
+elif [[ "$PYVER" == "3.6" || "$PYVER" == "3.7" ]]; then
+    echo "Using pwndbg branch: 2023.07.17 (for Python 3.6/3.7)"
+    git fetch --all
+    git checkout 2023.07.17
+elif [[ "$PYVER" =~ ^3\.(10|11|12|13|14|15|16|17|18|19)$ ]]; then
+    echo "Using latest pwndbg master branch (for Python $PYVER)"
+    git fetch --all
+    # git checkout master
 else
-    sudo apt-get install -y libgcc1:i386
+    echo "Warning: Detected Python $PYVER, which may not be supported by pwndbg."
+    echo "Please refer to https://github.com/pwndbg/pwndbg for supported versions."
+    sleep 2
 fi
 
-echo "======================="
-echo "Python packages for pwn..."
-source $HOME/.anaconda/bin/activate && \
-conda activate&& \
-pip install --upgrade pip && \
-pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/simple && \
-pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn && \
-pip install --no-cache-dir \
-setuptools \
-pwntools \
-pwncli \
-ropgadget \
-z3-solver \
-smmap2 \
-apscheduler \
-ropper \
-unicorn \
-keystone-engine \
-capstone \
-angr \
-pebble \
-r2pipe \
-LibcSearcher \
-poetry \
-pipx
+echo "Running pwndbg setup.sh ..."
+if ! ./setup.sh; then
+    echo "pwndbg setup.sh failed. Please check the error log above."
+    exit 1
+fi
 
-echo "======================="
-echo "Installing gdb..."
-conda install -c conda-forge gdb --yes
+# 自动安装 pwncli
+echo "Running pwncli setup.sh ..."
+cd "$HOME/.dotfile/gdb_config/pwncli"
+pip install --editable .
 
-# if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
-#     gdb_version="gdb-15.2"
-# elif dpkg --compare-versions "$ubuntu_version" "ge" "18.04"; then
-#     gdb_version="gdb-10.2"
-# else
-#     gdb_version="gdb-8.3"
-# fi
-# CONDA_PREFIX=$(conda info --base)/envs/py310
-# wget https://ftp.gnu.org/gnu/gdb/$gdb_version.tar.gz
-# tar -xzf $gdb_version.tar.gz
-# cd $gdb_version
-# ./configure \
-#     --prefix=/usr/local \
-#     --with-python=$CONDA_PREFIX/bin/python3.10 \
-#     LDFLAGS="-L$CONDA_PREFIX/lib -L$CONDA_PREFIX/lib64" \
-#     CPPFLAGS="-I$CONDA_PREFIX/include/python3.10 -I$CONDA_PREFIX/include"
-# make -j$(nproc)
-# sudo make install
-# cd ..
-# rm -rf $gdb_version $gdb_version.tar.gz
-
-echo "======================="
-echo "installing pwndbg"
-# if dpkg --compare-versions "$ubuntu_version" "ge" "20.04"; then
-#     pwndbg_version="master"
-# else
-#     pwndbg_version="2024.08.29"
-# fi
-pwndbg_version="2024.08.29"
-git submodule init && git submodule update
-cd "$HOME/.dotfile/gdb_config/pwndbg"
-git checkout $pwndbg_version
-poetry install
+# 链接 gdbinit
+if [ -e "$HOME/.gdbinit" ]; then
+    rm -f "$HOME/.gdbinit"
+fi
 ln -sf "$HOME/.dotfile/gdb_config/gdbinit" "$HOME/.gdbinit"
 
-sudo bash -c "echo core > /proc/sys/kernel/core_pattern"
+git clone https://github.com/matrix1001/glibc-all-in-one.git "$HOME/glibc-all-in-one" && \
+mkdir -p "$HOME/glibc-all-in-one/libs" && \
+./update_list
+
+echo core | sudo tee /proc/sys/kernel/core_pattern || true
+
 echo "PWN configuration setup completed successfully!"

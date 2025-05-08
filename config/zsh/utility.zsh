@@ -546,9 +546,9 @@ fi
 # proxy setting
 function proxy () {
     export windows_host=$(ip route | grep default | awk '{print $3}')
-    export windows_host=172.24.208.1
-    export socks_hostport=10808
-    export http_hostport=10809
+    export windows_host=127.0.0.1
+    export socks_hostport=10800
+    export http_hostport=10801
 
     export https_proxy=http://${windows_host}:${http_hostport}
     export HTTPS_PROXY=http://${windows_host}:${http_hostport}

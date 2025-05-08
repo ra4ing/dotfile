@@ -1,3 +1,7 @@
+# pwn
+alias openaslr="sudo -u root sh -c 'echo 2 >/proc/sys/kernel/randomize_va_space'"
+alias closeaslr="sudo -u root sh -c 'echo 0 >/proc/sys/kernel/randomize_va_space'"
+
 run-docker-env() {
     # 检查必需的命令是否存在
     for cmd in docker curl jq; do

@@ -26,7 +26,6 @@ plugins
 prompt
 keybinds
 pwn
-wifi_proxy
 EOF
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions

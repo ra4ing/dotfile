@@ -1,6 +1,10 @@
-source ~/.dotfile/gdb_config/pwndbg/gdbinit.py
-source ~/.dotfile/gdb_config/Pwngdb/pwngdb.py
-source ~/.dotfile/gdb_config/Pwngdb/angelheap/gdbinit.py
+python
+import os
+home = os.path.expanduser("~")
+gdb.execute(f"source {home}/.dotfile/gdb_config/pwndbg/gdbinit.py")
+gdb.execute(f"source {home}/.dotfile/gdb_config/Pwngdb/pwngdb.py")
+gdb.execute(f"source {home}/.dotfile/gdb_config/Pwngdb/angelheap/gdbinit.py")
+end
 
 # disable history
 set history save off
