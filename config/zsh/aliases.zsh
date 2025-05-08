@@ -2,10 +2,6 @@
 ## Aliases
 ##
 
-# pwn
-alias openaslr="sudo -u root sh -c 'echo 2 >/proc/sys/kernel/randomize_va_space'"
-alias closeaslr="sudo -u root sh -c 'echo 0 >/proc/sys/kernel/randomize_va_space'"
-
 alias lookingglass="~/looking-glass-B5.0.1/client/build/looking-glass-client -F"
 # Change directory aliases
 alias home='cd ~'
