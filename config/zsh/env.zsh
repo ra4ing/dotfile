@@ -16,6 +16,7 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.9/lib64"
 
 export TERM="xterm-256color"
 export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -29,6 +30,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/perl5/bin:$PATH"
 export PATH="/usr/lib/ruby/gems/3.0.0:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/cuda-12.9/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export GPG_TTY="${TTY:-$(tty)}"
@@ -91,6 +93,7 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_LAZY=1
 export PATH=~/.npm-global/bin:$PATH
 
 ## Comment this to use normal manpager

@@ -17,19 +17,6 @@ sudo rm -rf neovim
 # ripgrep
 sudo apt-get install ripgrep
 
-#nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install v16.13.2
-nvm use v16.13.2
-
-#enable global
-mkdir -p ~/.npm-global/lib
-npm config set prefix '~/.npm-global'
-
-npm config set registry=https://registry.npmmirror.com
 
 #lazygit
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')

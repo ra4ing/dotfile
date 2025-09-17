@@ -80,6 +80,19 @@ tar -xzf "$GITSTATUSD_DIR/gitstatusd-linux-x86_64.tar.gz" -C "$GITSTATUSD_DIR"
 rm -rf "$GITSTATUSD_DIR/gitstatusd-linux-x86_64.tar.gz"
 typeset -g POWERLEVEL9K_GITSTATUS_DIR="$GITSTATUSD_DIR"
 
+#nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm install node --lts
+nvm alias default node
+
+#enable global
+mkdir -p ~/.npm-global/lib
+
+npm config set registry=https://registry.npmmirror.com
+
 zsh "$HOME/.dotfile/config/zsh/.zshrc"
 
 echo "Base configuration setup completed successfully!"
