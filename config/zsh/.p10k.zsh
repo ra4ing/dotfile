@@ -31,6 +31,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    env_context            # environment context (docker/wsl/machine)
     os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
@@ -1826,6 +1827,29 @@
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
+  # === Environment Context Indicator ===
+  # Controlled by PROMPT_ENV_LABEL env var: docker, wsl, machine
+  function prompt_env_context() {
+    local label="${PROMPT_ENV_LABEL:-docker}"
+    case "$label" in
+      docker)
+        p10k segment -b 97 -f 254 -i $'\uf308' -t ' Docker'
+        ;;
+      wsl)
+        p10k segment -b 60 -f 254 -i $'\uf17c' -t ' WSL'
+        ;;
+      machine)
+        p10k segment -b 64 -f 254 -i $'\uf233' -t ' Machine'
+        ;;
+      *)
+        p10k segment -b 97 -f 254 -i $'\uf308' -t " $label"
+        ;;
+    esac
+  }
+  function instant_prompt_env_context() {
+    prompt_env_context
+  }
+
   (( ! $+functions[p10k] )) || p10k reload
 }
 
