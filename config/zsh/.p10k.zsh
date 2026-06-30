@@ -1828,7 +1828,7 @@
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
   # === Environment Context Indicator ===
-  # Controlled by PROMPT_ENV_LABEL env var: docker, wsl, machine
+  # Controlled by PROMPT_ENV_LABEL env var: docker, wsl, desktop-wsl, laptop-wsl, machine
   function prompt_env_context() {
     local label="${PROMPT_ENV_LABEL:-docker}"
     case "$label" in
@@ -1837,6 +1837,12 @@
         ;;
       wsl)
         p10k segment -b 60 -f 254 -i $'\uf17c' -t ' WSL'
+        ;;
+      desktop-wsl)
+        p10k segment -b 25 -f 254 -i $'\uf108' -t ' Desktop WSL'
+        ;;
+      laptop-wsl)
+        p10k segment -b 166 -f 254 -i $'\uf109' -t ' Laptop WSL'
         ;;
       machine)
         p10k segment -b 64 -f 254 -i $'\uf233' -t ' Machine'

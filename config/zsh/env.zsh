@@ -3,7 +3,7 @@
 ##
 proxy > /dev/null 2>&1
 
-export PROMPT_ENV_LABEL="docker"
+export PROMPT_ENV_LABEL="desktop-wsl"
 
 
 # opencode
@@ -28,6 +28,7 @@ HIST_STAMPS="yyyy-mm-dd"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.9/lib64"
 
 export TERM="xterm-256color"
+export COLORTERM=truecolor
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/perl5/bin${PATH:+:${PATH}}";
@@ -45,6 +46,7 @@ export PATH="$PATH:$HOME/.dotnet"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export GPG_TTY="${TTY:-$(tty)}"
+export PATH="/home/ra4ing/.cache/.bun/bin:$PATH"
 # export PATH="$HOME/tools/firtool-1.57.1/bin:$PATH"
 # export PATH="$HOME/tools/oss-cad-suite/bin:$PATH"
 # export PATH="$HOME/tools/firrtl/utils/bin:$PATH"
