@@ -4,3 +4,27 @@
 **/*.pyc
 config/nvm
 config/pip
+
+# caches & generated state
+config/configstore/
+config/fcitx/cached_layout
+config/fcitx5/conf/cached_layouts
+config/fcitx5/conf/notifications.conf_*
+
+# runtime state
+config/fcitx/profile
+config/fcitx5/profile
+config/htop/
+config/rofi/global/history.txt
+
+# dead: fcitx v4 (superseded by fcitx5)
+config/fcitx/
+
+# neofetch images (not config)
+config/neofetch/images/
+
+# vendored upstream content
+config/lvim/README.md
+config/lvim/LICENSE
+config/lvim/.java-google-formatter.xml
+config/lvim/.vale/
